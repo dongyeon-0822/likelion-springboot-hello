@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/post-api")
 public class PutController {
-    @PostMapping(value = "/member3")
+    @PutMapping(value = "/member3")
     public ResponseEntity<MemberDto> putMember(@RequestBody MemberDto memberDto) {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(memberDto);
     }
