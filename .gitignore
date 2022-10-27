@@ -33,5 +33,3 @@ build/
 .vscode/
 .mvn/
 .idea/
-application.properties
-application.yml
