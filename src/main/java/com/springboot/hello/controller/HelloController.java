@@ -1,5 +1,6 @@
 package com.springboot.hello.controller;
 
+import com.springboot.hello.domain.dto.MemberDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -17,20 +18,26 @@ public class HelloController {
     }
 
     @GetMapping(value = "/variable1/{variable}")
-    public String getVariable1(@PathVariable("variable") String variable) {
+    public String getVariable(@PathVariable("variable") String variable) {
         return variable;
     }
 
     @GetMapping(value = "/request1")
-    public String getVariable2(@RequestParam String name, @RequestParam String email, @RequestParam String organization) {
+    public String getVariable1(@RequestParam String name, @RequestParam String email, @RequestParam String organization) {
         return String.format("%s %s %s", name, email, organization);
     }
 
     @GetMapping(value = "/request2")
-    public String getVariable3(@RequestParam Map<String,StringBuilder> params) {
+    public String getVariable2(@RequestParam Map<String,String> params) {
+        StringBuilder sb = new StringBuilder();
         params.entrySet().forEach((map)->{
-            System.out.printf("key:%s value:%s\n",map.getKey(),map.getValue());
+            sb.append(map.getKey()+ ":" + map.getValue() + "\n");
         });
-        return "호출 완료";
+        return sb.toString();
+    }
+
+    @GetMapping(value = "/request3")
+    public String getVariable3(MemberDto memberDto) {
+        return memberDto.toString();
     }
 }
