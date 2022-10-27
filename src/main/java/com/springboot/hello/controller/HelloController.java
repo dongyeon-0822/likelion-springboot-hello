@@ -25,6 +25,7 @@ public class HelloController {
     public String getVariable2(@RequestParam String name, @RequestParam String email, @RequestParam String organization) {
         return String.format("%s %s %s", name, email, organization);
     }
+
     @GetMapping(value = "/request2")
     public String getVariable3(@RequestParam Map<String,StringBuilder> params) {
         params.entrySet().forEach((map)->{
