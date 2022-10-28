@@ -18,7 +18,12 @@ public class GetController {
     }
 
     @GetMapping(value = "/variable1/{variable}")
-    public String getVariable(@PathVariable("variable") String variable) {
+    public String getVariable(@PathVariable String variable) {
+        return variable;
+    }
+
+    @GetMapping(value = "/variable2/{variable}")
+    public String getVariable0(@PathVariable("variable") String variable) {
         return variable;
     }
 
