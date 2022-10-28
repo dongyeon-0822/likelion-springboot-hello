@@ -33,6 +33,9 @@ public class UserDao {
         String sql = "Select * from user where id = ?";
         return this.jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
+    public void deleteById(String id) {
+        this.jdbcTemplate.update("Delete * from user where id = ?;", id);
+    }
     public void deleteAll() {
         this.jdbcTemplate.update("Delete from user");
     }
