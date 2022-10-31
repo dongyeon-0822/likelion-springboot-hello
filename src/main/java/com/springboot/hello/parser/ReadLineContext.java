@@ -21,7 +21,11 @@ public class ReadLineContext<T> {
         );
         String str;
         while ((str = reader.readLine()) != null) {
-            result.add(parser.parse(str));
+            try {
+                result.add(parser.parse(str));
+            } catch (Exception e) {
+                System.out.println("parsing 중에 문제가 생겨 이 라인은 넘어갑니다, 파일내용 : " + str );
+            }
         }
         reader.close();
         return result;
