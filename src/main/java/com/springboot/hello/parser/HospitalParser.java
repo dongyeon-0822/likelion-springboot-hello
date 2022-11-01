@@ -5,6 +5,7 @@ import net.bytebuddy.asm.Advice;
 
 import java.time.LocalDateTime;
 
+// 파일에서 한줄을 읽어와서 하나의 Hospital 객체를 반환하는 parser
 public class HospitalParser implements Parser<Hospital> {
     @Override
     public Hospital parse(String str) {
