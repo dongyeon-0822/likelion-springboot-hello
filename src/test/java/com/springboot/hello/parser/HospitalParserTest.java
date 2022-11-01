@@ -26,17 +26,20 @@ class HospitalParserTest {
     @Autowired
     HospitalDao hospitalDao;
 
-    @BeforeEach
-    void setUp() {
-        this.hospitalReadLineContext = context.getBean("hospitalReadLineContext", ReadLineContext.class);
-    }
+//    @BeforeEach
+//    void setUp() {
+//        this.hospitalReadLineContext = context.getBean("hospitalReadLineContext", ReadLineContext.class);
+//    }
 
     @Test
     @DisplayName("Hospital이 insert가 잘 되는지")
     void add() {
+        hospitalDao.deleteAll();
+        assertEquals(0,hospitalDao.getCount());
         HospitalParser hp = new HospitalParser();
         Hospital hospital = hp.parse(line1);
         hospitalDao.add(hospital);
+        assertEquals(1,hospitalDao.getCount());
     }
 
 
