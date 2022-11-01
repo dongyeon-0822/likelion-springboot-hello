@@ -1,5 +1,6 @@
 package com.springboot.hello.parser;
 
+import com.springboot.hello.dao.HospitalDao;
 import com.springboot.hello.domain.Hospital;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,10 +23,22 @@ class HospitalParserTest {
     ReadLineContext<Hospital> hospitalReadLineContext;
     ApplicationContext context;
 
+    @Autowired
+    HospitalDao hospitalDao;
+
     @BeforeEach
     void setUp() {
         this.hospitalReadLineContext = context.getBean("hospitalReadLineContext", ReadLineContext.class);
     }
+
+    @Test
+    @DisplayName("Hospital이 insert가 잘 되는지")
+    void add() {
+        HospitalParser hp = new HospitalParser();
+        Hospital hospital = hp.parse(line1);
+        hospitalDao.add(hospital);
+    }
+
 
     @Test
     @DisplayName("csv 1줄을 Hospital 객체를 잘 생성하는지 ")
