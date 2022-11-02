@@ -2,6 +2,7 @@ package com.springboot.hello.parser;
 
 import com.springboot.hello.dao.HospitalDao;
 import com.springboot.hello.domain.Hospital;
+import com.springboot.hello.service.HospitalService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ class HospitalParserTest {
 
     @Autowired
     HospitalDao hospitalDao;
+    private HospitalService hospitalService;
 
 //    @BeforeEach
 //    void setUp() {
@@ -94,13 +96,11 @@ class HospitalParserTest {
     @Test
     @DisplayName("10만건 이상 데이터가 파싱 되는지")
     void oneHundreadThousandRows() throws IOException {
-        String filename = "C:\\Users\\LG\\OneDrive\\문서\\GitHub\\hello\\data\\fulldata_01_01_02_P_의원.csv";
-        List<Hospital> hospitalList = hospitalReadLineContext.readByLine(filename);
-        assertTrue(hospitalList.size() > 1000);
-        assertTrue(hospitalList.size() > 10000);
-        for (int i = 0; i < 10; i++) {
-            System.out.println(hospitalList.get(i).getHospitalName());
-        }
-        System.out.printf("파싱된 데이터 개수:", hospitalList.size());
+        hospitalDao.deleteAll();
+        String filename = "C:\\Users\\LG\\OneDrive\\문서\\GitHub\\hello\\data\\fulldata_01_01_02_P_의원_인코딩.csv";
+        int cnt = this.hospitalService.insertLargeVolumeHospitalData(filename);
+        assertTrue(cnt > 1000);
+        assertTrue(cnt > 10000);
+        System.out.printf("파싱된 데이터 개수:%d", cnt);
     }
 }
